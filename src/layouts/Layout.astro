@@ -2,8 +2,9 @@
 interface Props {
   title: string;
   description?: string;
+  homeLayout?: boolean;
 }
-const { title, description = 'demo3: 이슈부터 코드 리뷰, CI, Pages 배포까지 완료 상태 백업을 준비하는 한국어 사이트' } = Astro.props;
+const { title, description = 'demo3: 이슈부터 코드 리뷰, CI, Pages 배포까지 완료 상태 백업을 준비하는 한국어 사이트', homeLayout = false } = Astro.props;
 // Normalise BASE_URL so project-page navigation keeps its separating slash.
 const rawBase = import.meta.env.BASE_URL;
 const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
@@ -16,7 +17,7 @@ const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
     <meta name="description" content={description} />
     <title>{title} · demo3</title>
   </head>
-  <body>
+  <body class={homeLayout ? 'home-page' : undefined}>
     <header class="site-header">
       <a class="brand" href={base}>demo3 · Ship with AI</a>
       <nav>
@@ -31,7 +32,7 @@ const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
         <a href={`${base}diy/`}>직접 해보기</a>
       </nav>
     </header>
-    <main>
+    <main class={homeLayout ? 'home-main' : undefined}>
       <slot />
     </main>
     <footer class="site-footer">
@@ -72,6 +73,11 @@ const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
         margin: 0 auto;
         padding: 2rem 1.5rem 4rem;
       }
+      .home-main {
+        max-width: 1200px;
+        padding: 1.25rem 1.5rem 4rem;
+      }
+      :global(body.home-page) { background: var(--home-bg, #f8f5f2); }
       .site-footer {
         text-align: center;
         color: var(--muted);
