@@ -1,12 +1,16 @@
-# demo3 — 완료 상태 백업 준비
+# demo3 — 완료 상태 백업
 
 **AI Genius 시즌 5 에피소드 3 — AI로 완성하는 코드 리뷰부터 보안, 배포까지**
 
-demo3는 **완료 상태 백업을 준비하는 저장소**입니다. 아직 완료된 백업이나
-완료된 실습 결과가 아닙니다. 현재는 로컬 기준 소스와 문서만 준비하며,
-원격 저장소 생성·푸시·에이전트 실행·PR 생성·병합·배포는 수행하지 않았습니다.
+demo3는 라이브 실습이 진행되지 않을 때 실제 이슈·PR·리뷰·배포 기록을 보여주기 위한 독립 백업입니다.
+현재 결과는 [이슈 #3](https://github.com/ijhan-biz/demo3/issues/3),
+[PR #4](https://github.com/ijhan-biz/demo3/pull/4),
+[Actions](https://github.com/ijhan-biz/demo3/actions),
+[공개 사이트](https://ijhan-biz.github.io/demo3/)에서 확인합니다.
+완료 판정은 PR 병합, 해당 main의 검사·배포 성공, `DEMO3-LIVE-03` 화면 확인을 함께 기준으로 삼습니다.
+아래의 초기 상태·준비 절차는 기준 커밋 `f57ad946` 시점의 설명이며 현재 실행 상태를 대신하지 않습니다.
 
-## 기준 소스와 현재 상태
+## 기준 소스와 초기 상태
 
 - 직접 가져온 소스: [ijhan-biz/demo2, 0c223e286763df0e243e4e263f14a099d684b271](https://github.com/ijhan-biz/demo2/tree/0c223e286763df0e243e4e263f14a099d684b271)
 - 이전 출처: [ijhan-biz/ship-with-ai-demo, 79d310030b681765f4a51050a11829d992c9d831](https://github.com/ijhan-biz/ship-with-ai-demo/commit/79d310030b681765f4a51050a11829d992c9d831)
@@ -22,12 +26,12 @@ demo3는 **완료 상태 백업을 준비하는 저장소**입니다. 아직 완
 과거 출처의 PR 번호를 demo3 기록으로 바꾸어 소개하지 않습니다.
 향후 원격 상태는 **demo3의 실제 PR·Actions 링크와 해당 SHA**로만 설명합니다.
 
-## 예정 주소
+## 실행 결과 확인 주소
 
 - 독립 공개 저장소: <https://github.com/ijhan-biz/demo3>
 - GitHub Pages: <https://ijhan-biz.github.io/demo3>
 
-생성·배포 예정 주소이며 현재 서비스가 준비되었다는 뜻이 아닙니다.
+주소가 열린다는 것만으로 최종 UI 작업 완료를 뜻하지 않습니다. 위 PR·Actions·화면의 대상 변경을 대조합니다.
 
 ## 향후 홈 UI 작업
 
@@ -44,7 +48,7 @@ charcoal/rose 디자인과 390px 모바일 대응입니다.
 보안 코드·의존성·잠금 파일·워크플로·Dependabot 일정·피드백·나머지 9개 페이지는
 변경하지 않습니다. 피드백의 브라우저 내 저장과 입력 검증을 유지합니다.
 
-## 승인 후 설정할 운영 계획 — 아직 미실행
+## 초기 운영 설정 절차와 유지 기준
 
 1. 공개 저장소 생성, 게시, 이슈 생성, Copilot 할당은 각각 실행 내용을
    사용자에게 미리 보여 주고 명시적으로 승인받습니다.
@@ -56,8 +60,8 @@ charcoal/rose 디자인과 390px 모바일 대응입니다.
    우회 없음, non-fast-forward 푸시·삭제 금지로 계획합니다.
    strict 필수 검사는 `build`, `Analyze (actions)`, `Analyze (javascript-typescript)`이며,
    모두 GitHub Actions `integration_id: 15368`에 연결합니다.
-   `code_scan`은 CodeQL, `error` / `high_or_higher` 기준으로 계획합니다.
-4. Copilot 사용 권한을 확인하고 자동 리뷰는 `review_on_push: true`, `draft: false`로
+   `code_scanning`은 CodeQL, `alerts_threshold: errors` / `security_alerts_threshold: high_or_higher` 기준입니다.
+4. Copilot 사용 권한을 확인하고 자동 리뷰는 `review_on_push: true`, `review_draft_pull_requests: false`로
    계획합니다. 작업 에이전트와 PR 리뷰어는 별개이며, 에이전트는 병합하지 않습니다.
 5. 복사한 Dependabot yml 일정(npm 매일, GitHub Actions 매주)은 그대로 둡니다.
    원격 Dependabot alerts와 security updates는 demo2와 동일하게 **비활성화**할 계획입니다.
