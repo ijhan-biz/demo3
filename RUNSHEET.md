@@ -1,8 +1,11 @@
-# demo3 진행표 — 완료 상태 백업 준비
+# demo3 진행표 — 백업의 실행 기록 확인
 
-이 문서는 **향후 승인 후 실행할 절차**이며 성공 기록이 아닙니다.
-현재는 로컬 준비만 진행합니다. 원격 생성·푸시·에이전트·PR·병합·배포는 미실행이며,
-demo3는 아직 완료된 백업이 아닙니다.
+이 문서는 초기 준비 절차와 실제 결과를 확인하는 순서를 정리합니다.
+현재 작업은 [이슈 #3](https://github.com/ijhan-biz/demo3/issues/3) →
+[Copilot PR #4](https://github.com/ijhan-biz/demo3/pull/4) →
+[Actions](https://github.com/ijhan-biz/demo3/actions) →
+[공개 사이트](https://ijhan-biz.github.io/demo3/)로 추적합니다.
+아래 초기 상태와 준비 계획을 현재 미실행 상태로 해석하지 말고, 최신 PR·main SHA·배포 화면을 확인합니다.
 
 ## 1. 기준과 출처 확인
 
@@ -30,15 +33,15 @@ demo3는 아직 완료된 백업이 아닙니다.
    우회 없음, non-fast-forward 푸시·삭제 금지.
 5. strict 필수 검사: `build`, `Analyze (actions)`, `Analyze (javascript-typescript)`.
    각 검사는 GitHub Actions `integration_id: 15368`에 연결합니다.
-   `code_scan`은 CodeQL의 `error` / `high_or_higher` 기준입니다.
-6. Copilot 자동 리뷰 계획: `review_on_push: true`, `draft: false`.
+   `code_scanning`은 CodeQL의 `alerts_threshold: errors` / `security_alerts_threshold: high_or_higher` 기준입니다.
+6. Copilot 자동 리뷰 기준: `review_on_push: true`, `review_draft_pull_requests: false`.
    해당 저장소의 실제 권한과 적용 상태는 승인 후 따로 확인합니다.
 7. 복사한 Dependabot yml 일정(npm 매일·GitHub Actions 매주)은 변경하지 않습니다.
    원격 Dependabot alerts·security updates는 demo2와 동일하게 비활성화할 계획입니다.
    Secret scanning·push protection은 승인받은 향후 설정에서만 활성화합니다.
    보안 기능 일괄 활성화는 하지 않습니다.
 
-위 항목은 **미적용 계획**입니다. 완료 여부는 demo3의 실제 설정과 PR·Actions 증거로 확인합니다.
+위 항목은 설정 확인 기준입니다. 완료 여부는 demo3의 실제 설정과 PR·Actions 증거로 확인합니다.
 
 ## 3. 전체 이슈 원문 승인과 Copilot 할당
 
@@ -61,7 +64,7 @@ UI 변경 허용 파일은 `src/pages/index.astro`, `src/layouts/Layout.astro`,
   작업 에이전트의 설명을 별도 Copilot 코드 리뷰로 간주하지 않습니다.
 - 전체 diff의 허용 파일 범위와 요구 사항을 확인합니다. 워크플로 실행 승인이 필요하면
   diff·권한을 먼저 검토합니다. 실제 리뷰 의견을 처리하고 대화를 해결합니다.
-- 최신 PR SHA에서 strict 필수 `build` 및 두 `Analyze` 검사, CodeQL `code_scan` 조건을
+- 최신 PR SHA에서 strict 필수 `build` 및 두 `Analyze` 검사, CodeQL `code_scanning` 조건을
   모두 확인합니다. 추가 커밋이 생기면 다시 확인합니다.
 - `build`에서는 잠금 파일 설치, 테스트, high 수준 감사, 빌드, 매니페스트·잠금 파일
   무변경을 확인합니다. 기준은 기존 48개 테스트·10개 페이지이며 필요한 홈 테스트도 검증합니다.

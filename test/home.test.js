@@ -67,4 +67,8 @@ test('넓은 레이아웃은 홈에서만 선택되며 다른 페이지 폭은 �
   assert.match(layout, /class=\{homeLayout \? 'home-main' : undefined\}/);
   assert.match(layout, /max-width: 1200px;/);
   assert.match(layout, /--max-width: 780px;/);
+  assert.match(layout, /@media \(max-width: 460px\)\s*\{\s*\.home-main \{ padding: 1rem 0\.85rem 3rem; \}/);
+  assert.doesNotMatch(home, /\.home-main\s*\{/);
+  assert.match(home, /outline: 3px solid var\(--home-rose-dark\);/);
+  assert.match(home, /\.hero a:focus-visible \{ outline-color: var\(--home-focus-on-dark\); \}/);
 });
